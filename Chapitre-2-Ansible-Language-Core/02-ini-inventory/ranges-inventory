@@ -1,0 +1,64 @@
+# Inventory avec plages d'hôtes (Host Ranges)
+# Démonstration des patterns pour générer automatiquement des listes d'hôtes
+
+# ==========================================
+# EXEMPLE 1: Plage numérique simple
+# ==========================================
+# Au lieu d'écrire node1, node2, node3 séparément
+# On peut utiliser une plage :
+[all-nodes]
+node[1:3]
+
+# ==========================================
+# EXEMPLE 2: Simulation de serveurs web
+# ==========================================
+# Simulons des serveurs web avec des noms standardisés
+# (même si dans notre lab, on n'a que node1, node2, node3)
+[webservers-range]
+# Pattern pour web01, web02, web03, web04, web05
+# web[01:05].example.com
+
+# Pour notre lab, on simule avec nos nodes existants
+node[1:2]
+
+# ==========================================
+# EXEMPLE 3: Plage alphabétique
+# ==========================================
+# On peut aussi utiliser des lettres
+[database-cluster]
+# Pattern théorique : db[a:c].domain.com
+# Pour notre lab, on utilise :
+node[2:3]
+
+# ==========================================
+# EXEMPLE 4: Plages avec padding (zéros)
+# ==========================================
+# Pattern avec zéros : server[01:10].company.com
+[servers-padded]
+# Pour notre lab, on simule :
+node[1:3]
+
+# ==========================================
+# EXEMPLE 5: Combinaison de plages et hôtes individuels
+# ==========================================
+[mixed-hosts]
+# Plage + hôte individuel
+node[1:2]
+node3
+
+# ==========================================
+# VARIABLES GLOBALES
+# ==========================================
+[all:vars]
+ansible_user=root
+ansible_ssh_pass=ansible123
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+# Variables spécifiques aux groupes
+[webservers-range:vars]
+server_role=web
+http_port=80
+
+[database-cluster:vars]
+server_role=database
+db_port=3306

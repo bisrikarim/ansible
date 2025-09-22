@@ -1,0 +1,68 @@
+# Inventory avec variables spécifiques par hôte
+# Chaque hôte peut avoir sa propre configuration
+
+# ==========================================
+# SERVEURS WEB AVEC CONFIGURATIONS DIFFÉRENTES
+# ==========================================
+[webservers]
+# Chaque serveur web a sa propre configuration
+node1 http_port=80 max_clients=100 server_name=web-primary
+node2 http_port=8080 max_clients=200 server_name=web-secondary
+
+# ==========================================
+# SERVEURS DE BASE DE DONNÉES
+# ==========================================
+[databases]
+# Serveur de base de données avec sa config spécifique
+node3 db_port=3306 max_connections=150 db_role=master backup_enabled=true
+
+# ==========================================
+# SERVEURS DE CACHE
+# ==========================================
+[cache-servers]
+# Serveur de cache (on réutilise node2 pour simuler un rôle multiple)
+node2 cache_port=6379 memory_limit=512mb cache_type=redis
+
+# ==========================================
+# EXEMPLE : DIFFÉRENTES VERSIONS DE LOGICIELS
+# ==========================================
+[app-servers]
+node1 app_version=2.1.0 java_version=11 heap_size=1024m
+node2 app_version=2.0.5 java_version=8 heap_size=2048m
+node3 app_version=2.1.0 java_version=11 heap_size=1024m
+
+# ==========================================
+# EXEMPLE : CONFIGURATION RÉSEAU SPÉCIFIQUE
+# ==========================================
+[network-config]
+# Configuration réseau spécifique (exemple théorique)
+node1 internal_ip=192.168.1.10 external_ip=203.0.113.10 bandwidth=1000
+node2 internal_ip=192.168.1.11 external_ip=203.0.113.11 bandwidth=500
+node3 internal_ip=192.168.1.12 external_ip=203.0.113.12 bandwidth=1000
+
+# ==========================================
+# VARIABLES GLOBALES
+# ==========================================
+[all:vars]
+ansible_user=root
+ansible_ssh_pass=ansible123
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+environment=production
+company=example-corp
+
+# Variables par groupe (s'appliquent à tous les hôtes du groupe)
+[webservers:vars]
+service_type=web
+restart_policy=always
+log_level=info
+
+[databases:vars]
+service_type=database
+restart_policy=unless-stopped
+log_level=warning
+backup_schedule=daily
+
+[cache-servers:vars]
+service_type=cache
+restart_policy=always
+log_level=error

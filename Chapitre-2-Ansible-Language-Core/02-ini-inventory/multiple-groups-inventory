@@ -1,0 +1,124 @@
+# Inventory avec hôtes dans plusieurs groupes
+# Un même hôte peut appartenir à plusieurs groupes selon ses rôles
+
+# ==========================================
+# GROUPES PAR FONCTION
+# ==========================================
+[webservers]
+node1
+node2
+
+[databases]
+node2    # node2 est à la fois webserver ET database
+node3
+
+[cache-servers]
+node1    # node1 est webserver ET cache
+node3    # node3 est database ET cache
+
+# ==========================================
+# GROUPES PAR ENVIRONNEMENT
+# ==========================================
+[production]
+node1
+node2
+
+[staging]
+node2    # node2 est en prod ET staging (simulation)
+node3
+
+# ==========================================
+# GROUPES PAR LOCALISATION
+# ==========================================
+[datacenter-east]
+node1
+node2
+
+[datacenter-west]
+node3
+
+[datacenter-backup]
+node2    # node2 sert aussi de backup
+
+# ==========================================
+# GROUPES PAR CRITICITÉ
+# ==========================================
+[critical-systems]
+node1    # Serveur critique
+node3    # Base de données critique
+
+[non-critical]
+node2    # Peut être redémarré sans impact majeur
+
+# ==========================================
+# GROUPES DE GROUPES (HIÉRARCHIE)
+# ==========================================
+# Groupe parent contenant d'autres groupes
+[application-tier:children]
+webservers
+cache-servers
+
+[data-tier:children]
+databases
+
+[all-production:children]
+application-tier
+data-tier
+
+# Groupe pour tous les services externes
+[external-services:children]
+webservers
+databases
+
+# ==========================================
+# VARIABLES PAR GROUPE
+# ==========================================
+[all:vars]
+ansible_user=root
+ansible_ssh_pass=ansible123
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+# Variables par fonction
+[webservers:vars]
+service_category=frontend
+monitoring_port=9090
+health_check_url=/health
+
+[databases:vars]
+service_category=backend
+monitoring_port=9091
+health_check_url=/db-status
+
+[cache-servers:vars]
+service_category=middleware
+monitoring_port=9092
+health_check_url=/cache-info
+
+# Variables par environnement
+[production:vars]
+log_level=warning
+backup_enabled=true
+monitoring_enabled=true
+
+[staging:vars]
+log_level=debug
+backup_enabled=false
+monitoring_enabled=false
+
+# Variables par localisation
+[datacenter-east:vars]
+timezone=America/New_York
+dns_servers=8.8.8.8,8.8.4.4
+
+[datacenter-west:vars]
+timezone=America/Los_Angeles
+dns_servers=1.1.1.1,1.0.0.1
+
+# Variables pour les groupes de groupes
+[application-tier:vars]
+tier_type=application
+scaling_enabled=true
+
+[data-tier:vars]
+tier_type=data
+scaling_enabled=false

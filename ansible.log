@@ -1,0 +1,804 @@
+2025-09-22 08:11:53,712 p=210 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:11:53,723 p=210 u=root n=ansible | @all:
+  |--@ungrouped:
+  |--@all-nodes:
+  |  |--node1
+  |  |--node2
+  |  |--node3
+  |--@webservers-range:
+  |  |--node1
+  |  |--node2
+  |--@database-cluster:
+  |  |--node2
+  |  |--node3
+  |--@servers-padded:
+  |  |--node1
+  |  |--node2
+  |  |--node3
+  |--@mixed-hosts:
+  |  |--node1
+  |  |--node2
+  |  |--node3
+2025-09-22 08:12:07,096 p=213 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:07,108 p=213 u=root n=ansible |   hosts (3):
+2025-09-22 08:12:07,108 p=213 u=root n=ansible |     node1
+2025-09-22 08:12:07,118 p=213 u=root n=ansible |     node2
+2025-09-22 08:12:07,119 p=213 u=root n=ansible |     node3
+2025-09-22 08:12:17,833 p=216 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:17,846 p=216 u=root n=ansible |   hosts (3):
+2025-09-22 08:12:17,846 p=216 u=root n=ansible |     node1
+2025-09-22 08:12:17,846 p=216 u=root n=ansible |     node2
+2025-09-22 08:12:17,847 p=216 u=root n=ansible |     node3
+2025-09-22 08:12:23,664 p=219 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:23,679 p=219 u=root n=ansible |   hosts (2):
+2025-09-22 08:12:23,679 p=219 u=root n=ansible |     node1
+2025-09-22 08:12:23,680 p=219 u=root n=ansible |     node2
+2025-09-22 08:12:29,229 p=222 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:29,249 p=222 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "node1": {
+                "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+                "ansible_ssh_pass": "ansible123",
+                "ansible_user": "root",
+                "http_port": 80,
+                "server_role": "web"
+            },
+            "node2": {
+                "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+                "ansible_ssh_pass": "ansible123",
+                "ansible_user": "root",
+                "db_port": 3306,
+                "http_port": 80,
+                "server_role": "web"
+            },
+            "node3": {
+                "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+                "ansible_ssh_pass": "ansible123",
+                "ansible_user": "root",
+                "db_port": 3306,
+                "server_role": "database"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "all-nodes",
+            "webservers-range",
+            "database-cluster",
+            "servers-padded",
+            "mixed-hosts"
+        ]
+    },
+    "all-nodes": {
+        "hosts": [
+            "node1",
+            "node2",
+            "node3"
+        ]
+    },
+    "database-cluster": {
+        "hosts": [
+            "node2",
+            "node3"
+        ]
+    },
+    "mixed-hosts": {
+        "hosts": [
+            "node1",
+            "node2",
+            "node3"
+        ]
+    },
+    "servers-padded": {
+        "hosts": [
+            "node1",
+            "node2",
+            "node3"
+        ]
+    },
+    "webservers-range": {
+        "hosts": [
+            "node1",
+            "node2"
+        ]
+    }
+}
+2025-09-22 08:12:38,874 p=225 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:39,298 p=225 u=root n=ansible | [WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:39,299 p=225 u=root n=ansible | node1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-09-22 08:12:39,300 p=225 u=root n=ansible | [WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:39,300 p=225 u=root n=ansible | node2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-09-22 08:12:39,300 p=225 u=root n=ansible | [WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:39,301 p=225 u=root n=ansible | node3 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-09-22 08:12:45,789 p=262 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:46,020 p=262 u=root n=ansible | [WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:46,026 p=262 u=root n=ansible | node1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-09-22 08:12:46,034 p=262 u=root n=ansible | [WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:46,035 p=262 u=root n=ansible | node2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.10"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-09-22 08:12:55,267 p=282 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:12:55,507 p=282 u=root n=ansible | [WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:55,508 p=282 u=root n=ansible | node3 | CHANGED | rc=0 >>
+node3
+
+2025-09-22 08:12:55,514 p=282 u=root n=ansible | [WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:55,514 p=282 u=root n=ansible | node1 | CHANGED | rc=0 >>
+node1
+
+2025-09-22 08:12:55,517 p=282 u=root n=ansible | [WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:12:55,517 p=282 u=root n=ansible | node2 | CHANGED | rc=0 >>
+node2
+
+2025-09-22 08:13:10,158 p=310 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:13:10,176 p=310 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:13:10,176 p=310 u=root n=ansible | {
+    "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+    "ansible_ssh_pass": "ansible123",
+    "ansible_user": "root",
+    "app_version": "2.1.0",
+    "bandwidth": 1000,
+    "company": "example-corp",
+    "environment": "production",
+    "external_ip": "203.0.113.10",
+    "heap_size": "1024m",
+    "http_port": 80,
+    "internal_ip": "192.168.1.10",
+    "java_version": 11,
+    "log_level": "info",
+    "max_clients": 100,
+    "restart_policy": "always",
+    "server_name": "web-primary",
+    "service_type": "web"
+}
+2025-09-22 08:13:15,539 p=313 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:13:15,562 p=313 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:13:15,563 p=313 u=root n=ansible | {
+    "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+    "ansible_ssh_pass": "ansible123",
+    "ansible_user": "root",
+    "app_version": "2.0.5",
+    "bandwidth": 500,
+    "cache_port": 6379,
+    "cache_type": "redis",
+    "company": "example-corp",
+    "environment": "production",
+    "external_ip": "203.0.113.11",
+    "heap_size": "2048m",
+    "http_port": 8080,
+    "internal_ip": "192.168.1.11",
+    "java_version": 8,
+    "log_level": "info",
+    "max_clients": 200,
+    "memory_limit": "512mb",
+    "restart_policy": "always",
+    "server_name": "web-secondary",
+    "service_type": "web"
+}
+2025-09-22 08:13:19,293 p=316 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:13:19,312 p=316 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:13:19,312 p=316 u=root n=ansible | {
+    "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+    "ansible_ssh_pass": "ansible123",
+    "ansible_user": "root",
+    "app_version": "2.1.0",
+    "backup_enabled": "true",
+    "backup_schedule": "daily",
+    "bandwidth": 1000,
+    "company": "example-corp",
+    "db_port": 3306,
+    "db_role": "master",
+    "environment": "production",
+    "external_ip": "203.0.113.12",
+    "heap_size": "1024m",
+    "internal_ip": "192.168.1.12",
+    "java_version": 11,
+    "log_level": "warning",
+    "max_connections": 150,
+    "restart_policy": "unless-stopped",
+    "service_type": "database"
+}
+2025-09-22 08:13:27,030 p=319 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:13:27,046 p=319 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:13:27,069 p=319 u=root n=ansible | @all:
+  |--@ungrouped:
+  |--@webservers:
+  |  |--node1
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.1.0}
+  |  |  |--{bandwidth = 1000}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.10}
+  |  |  |--{heap_size = 1024m}
+  |  |  |--{http_port = 80}
+  |  |  |--{internal_ip = 192.168.1.10}
+  |  |  |--{java_version = 11}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 100}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-primary}
+  |  |  |--{service_type = web}
+  |  |--node2
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.0.5}
+  |  |  |--{bandwidth = 500}
+  |  |  |--{cache_port = 6379}
+  |  |  |--{cache_type = redis}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.11}
+  |  |  |--{heap_size = 2048m}
+  |  |  |--{http_port = 8080}
+  |  |  |--{internal_ip = 192.168.1.11}
+  |  |  |--{java_version = 8}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 200}
+  |  |  |--{memory_limit = 512mb}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-secondary}
+  |  |  |--{service_type = web}
+  |  |--{log_level = info}
+  |  |--{restart_policy = always}
+  |  |--{service_type = web}
+  |--@databases:
+  |  |--node3
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.1.0}
+  |  |  |--{backup_enabled = true}
+  |  |  |--{backup_schedule = daily}
+  |  |  |--{bandwidth = 1000}
+  |  |  |--{company = example-corp}
+  |  |  |--{db_port = 3306}
+  |  |  |--{db_role = master}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.12}
+  |  |  |--{heap_size = 1024m}
+  |  |  |--{internal_ip = 192.168.1.12}
+  |  |  |--{java_version = 11}
+  |  |  |--{log_level = warning}
+  |  |  |--{max_connections = 150}
+  |  |  |--{restart_policy = unless-stopped}
+  |  |  |--{service_type = database}
+  |  |--{backup_schedule = daily}
+  |  |--{log_level = warning}
+  |  |--{restart_policy = unless-stopped}
+  |  |--{service_type = database}
+  |--@cache-servers:
+  |  |--node2
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.0.5}
+  |  |  |--{bandwidth = 500}
+  |  |  |--{cache_port = 6379}
+  |  |  |--{cache_type = redis}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.11}
+  |  |  |--{heap_size = 2048m}
+  |  |  |--{http_port = 8080}
+  |  |  |--{internal_ip = 192.168.1.11}
+  |  |  |--{java_version = 8}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 200}
+  |  |  |--{memory_limit = 512mb}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-secondary}
+  |  |  |--{service_type = web}
+  |  |--{log_level = error}
+  |  |--{restart_policy = always}
+  |  |--{service_type = cache}
+  |--@app-servers:
+  |  |--node1
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.1.0}
+  |  |  |--{bandwidth = 1000}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.10}
+  |  |  |--{heap_size = 1024m}
+  |  |  |--{http_port = 80}
+  |  |  |--{internal_ip = 192.168.1.10}
+  |  |  |--{java_version = 11}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 100}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-primary}
+  |  |  |--{service_type = web}
+  |  |--node2
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.0.5}
+  |  |  |--{bandwidth = 500}
+  |  |  |--{cache_port = 6379}
+  |  |  |--{cache_type = redis}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.11}
+  |  |  |--{heap_size = 2048m}
+  |  |  |--{http_port = 8080}
+  |  |  |--{internal_ip = 192.168.1.11}
+  |  |  |--{java_version = 8}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 200}
+  |  |  |--{memory_limit = 512mb}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-secondary}
+  |  |  |--{service_type = web}
+  |  |--node3
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.1.0}
+  |  |  |--{backup_enabled = true}
+  |  |  |--{backup_schedule = daily}
+  |  |  |--{bandwidth = 1000}
+  |  |  |--{company = example-corp}
+  |  |  |--{db_port = 3306}
+  |  |  |--{db_role = master}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.12}
+  |  |  |--{heap_size = 1024m}
+  |  |  |--{internal_ip = 192.168.1.12}
+  |  |  |--{java_version = 11}
+  |  |  |--{log_level = warning}
+  |  |  |--{max_connections = 150}
+  |  |  |--{restart_policy = unless-stopped}
+  |  |  |--{service_type = database}
+  |--@network-config:
+  |  |--node1
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.1.0}
+  |  |  |--{bandwidth = 1000}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.10}
+  |  |  |--{heap_size = 1024m}
+  |  |  |--{http_port = 80}
+  |  |  |--{internal_ip = 192.168.1.10}
+  |  |  |--{java_version = 11}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 100}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-primary}
+  |  |  |--{service_type = web}
+  |  |--node2
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.0.5}
+  |  |  |--{bandwidth = 500}
+  |  |  |--{cache_port = 6379}
+  |  |  |--{cache_type = redis}
+  |  |  |--{company = example-corp}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.11}
+  |  |  |--{heap_size = 2048m}
+  |  |  |--{http_port = 8080}
+  |  |  |--{internal_ip = 192.168.1.11}
+  |  |  |--{java_version = 8}
+  |  |  |--{log_level = info}
+  |  |  |--{max_clients = 200}
+  |  |  |--{memory_limit = 512mb}
+  |  |  |--{restart_policy = always}
+  |  |  |--{server_name = web-secondary}
+  |  |  |--{service_type = web}
+  |  |--node3
+  |  |  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |  |  |--{ansible_ssh_pass = ansible123}
+  |  |  |--{ansible_user = root}
+  |  |  |--{app_version = 2.1.0}
+  |  |  |--{backup_enabled = true}
+  |  |  |--{backup_schedule = daily}
+  |  |  |--{bandwidth = 1000}
+  |  |  |--{company = example-corp}
+  |  |  |--{db_port = 3306}
+  |  |  |--{db_role = master}
+  |  |  |--{environment = production}
+  |  |  |--{external_ip = 203.0.113.12}
+  |  |  |--{heap_size = 1024m}
+  |  |  |--{internal_ip = 192.168.1.12}
+  |  |  |--{java_version = 11}
+  |  |  |--{log_level = warning}
+  |  |  |--{max_connections = 150}
+  |  |  |--{restart_policy = unless-stopped}
+  |  |  |--{service_type = database}
+  |--{ansible_ssh_common_args = -o StrictHostKeyChecking=no}
+  |--{ansible_ssh_pass = ansible123}
+  |--{ansible_user = root}
+  |--{company = example-corp}
+  |--{environment = production}
+2025-09-22 08:13:37,974 p=322 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:13:38,013 p=322 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:13:38,028 p=322 u=root n=ansible | node1 | SUCCESS => {
+    "http_port": 80
+}
+2025-09-22 08:13:38,035 p=322 u=root n=ansible | node2 | SUCCESS => {
+    "http_port": 8080
+}
+2025-09-22 08:13:52,732 p=328 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:13:52,785 p=328 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:13:52,818 p=328 u=root n=ansible | node1 | SUCCESS => {
+    "hostvars[inventory_hostname]": {
+        "ansible_check_mode": false,
+        "ansible_config_file": "/etc/ansible/ansible.cfg",
+        "ansible_diff_mode": false,
+        "ansible_facts": {},
+        "ansible_forks": 5,
+        "ansible_inventory_sources": [
+            "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/host-variables-inventory"
+        ],
+        "ansible_playbook_python": "/usr/bin/python3",
+        "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+        "ansible_ssh_pass": "ansible123",
+        "ansible_user": "root",
+        "ansible_verbosity": 0,
+        "ansible_version": {
+            "full": "2.17.14",
+            "major": 2,
+            "minor": 17,
+            "revision": 14,
+            "string": "2.17.14"
+        },
+        "app_version": "2.1.0",
+        "bandwidth": 1000,
+        "company": "example-corp",
+        "environment": "production",
+        "external_ip": "203.0.113.10",
+        "group_names": [
+            "app-servers",
+            "network-config",
+            "webservers"
+        ],
+        "groups": {
+            "all": [
+                "node1",
+                "node2",
+                "node3"
+            ],
+            "app-servers": [
+                "node1",
+                "node2",
+                "node3"
+            ],
+            "cache-servers": [
+                "node2"
+            ],
+            "databases": [
+                "node3"
+            ],
+            "network-config": [
+                "node1",
+                "node2",
+                "node3"
+            ],
+            "ungrouped": [],
+            "webservers": [
+                "node1",
+                "node2"
+            ]
+        },
+        "heap_size": "1024m",
+        "http_port": 80,
+        "internal_ip": "192.168.1.10",
+        "inventory_dir": "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory",
+        "inventory_file": "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/host-variables-inventory",
+        "inventory_hostname": "node1",
+        "inventory_hostname_short": "node1",
+        "java_version": 11,
+        "log_level": "info",
+        "max_clients": 100,
+        "omit": "__omit_place_holder__6230505b088812e994e23b12277749cb74941691",
+        "playbook_dir": "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory",
+        "restart_policy": "always",
+        "server_name": "web-primary",
+        "service_type": "web"
+    }
+}
+2025-09-22 08:13:52,822 p=328 u=root n=ansible | node2 | SUCCESS => {
+    "hostvars[inventory_hostname]": {
+        "ansible_check_mode": false,
+        "ansible_config_file": "/etc/ansible/ansible.cfg",
+        "ansible_diff_mode": false,
+        "ansible_facts": {},
+        "ansible_forks": 5,
+        "ansible_inventory_sources": [
+            "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/host-variables-inventory"
+        ],
+        "ansible_playbook_python": "/usr/bin/python3",
+        "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+        "ansible_ssh_pass": "ansible123",
+        "ansible_user": "root",
+        "ansible_verbosity": 0,
+        "ansible_version": {
+            "full": "2.17.14",
+            "major": 2,
+            "minor": 17,
+            "revision": 14,
+            "string": "2.17.14"
+        },
+        "app_version": "2.0.5",
+        "bandwidth": 500,
+        "cache_port": 6379,
+        "cache_type": "redis",
+        "company": "example-corp",
+        "environment": "production",
+        "external_ip": "203.0.113.11",
+        "group_names": [
+            "app-servers",
+            "cache-servers",
+            "network-config",
+            "webservers"
+        ],
+        "groups": {
+            "all": [
+                "node1",
+                "node2",
+                "node3"
+            ],
+            "app-servers": [
+                "node1",
+                "node2",
+                "node3"
+            ],
+            "cache-servers": [
+                "node2"
+            ],
+            "databases": [
+                "node3"
+            ],
+            "network-config": [
+                "node1",
+                "node2",
+                "node3"
+            ],
+            "ungrouped": [],
+            "webservers": [
+                "node1",
+                "node2"
+            ]
+        },
+        "heap_size": "2048m",
+        "http_port": 8080,
+        "internal_ip": "192.168.1.11",
+        "inventory_dir": "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory",
+        "inventory_file": "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/host-variables-inventory",
+        "inventory_hostname": "node2",
+        "inventory_hostname_short": "node2",
+        "java_version": 8,
+        "log_level": "info",
+        "max_clients": 200,
+        "memory_limit": "512mb",
+        "omit": "__omit_place_holder__6230505b088812e994e23b12277749cb74941691",
+        "playbook_dir": "/ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory",
+        "restart_policy": "always",
+        "server_name": "web-secondary",
+        "service_type": "web"
+    }
+}
+2025-09-22 08:14:13,929 p=334 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:14:13,972 p=334 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:14:14,302 p=334 u=root n=ansible | [WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:14:14,303 p=334 u=root n=ansible | node2 | CHANGED | rc=0 >>
+Server web-secondary runs on port 8080
+
+2025-09-22 08:14:14,304 p=334 u=root n=ansible | [WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning
+of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2025-09-22 08:14:14,304 p=334 u=root n=ansible | node1 | CHANGED | rc=0 >>
+Server web-primary runs on port 80
+
+2025-09-22 08:14:27,849 p=360 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use
+-vvvv to see details
+
+2025-09-22 08:14:28,033 p=360 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:14:28,071 p=360 u=root n=ansible | node1 | SUCCESS => {
+    "http_port": 80
+}
+2025-09-22 08:14:28,073 p=360 u=root n=ansible | node2 | SUCCESS => {
+    "http_port": 8080
+}
+2025-09-22 08:14:28,085 p=360 u=root n=ansible | node3 | SUCCESS => {
+    "http_port": "VARIABLE IS NOT DEFINED!"
+}
+2025-09-22 08:14:35,705 p=368 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:14:35,751 p=368 u=root n=ansible | [WARNING]: Found variable using reserved name: environment
+
+2025-09-22 08:14:35,774 p=368 u=root n=ansible | node1 | SUCCESS => {
+    "msg": "node1 runs app version 2.1.0 with Java 11"
+}
+2025-09-22 08:14:35,781 p=368 u=root n=ansible | node2 | SUCCESS => {
+    "msg": "node2 runs app version 2.0.5 with Java 8"
+}
+2025-09-22 08:14:35,788 p=368 u=root n=ansible | node3 | SUCCESS => {
+    "msg": "node3 runs app version 2.1.0 with Java 11"
+}
+2025-09-22 08:14:48,515 p=375 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:14:48,529 p=375 u=root n=ansible | @all:
+  |--@ungrouped:
+  |--@production:
+  |  |--node1
+  |  |--node2
+  |--@staging:
+  |  |--node2
+  |  |--node3
+  |--@datacenter-east:
+  |  |--node1
+  |  |--node2
+  |--@datacenter-west:
+  |  |--node3
+  |--@datacenter-backup:
+  |  |--node2
+  |--@critical-systems:
+  |  |--node1
+  |  |--node3
+  |--@non-critical:
+  |  |--node2
+  |--@all-production:
+  |  |--@application-tier:
+  |  |  |--@webservers:
+  |  |  |  |--node1
+  |  |  |  |--node2
+  |  |  |--@cache-servers:
+  |  |  |  |--node1
+  |  |  |  |--node3
+  |  |--@data-tier:
+  |  |  |--@databases:
+  |  |  |  |--node2
+  |  |  |  |--node3
+  |--@external-services:
+  |  |--@webservers:
+  |  |  |--node1
+  |  |  |--node2
+  |  |--@databases:
+  |  |  |--node2
+  |  |  |--node3
+2025-09-22 08:14:55,477 p=378 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:14:55,502 p=378 u=root n=ansible |   hosts (2):
+2025-09-22 08:14:55,502 p=378 u=root n=ansible |     node1
+2025-09-22 08:14:55,503 p=378 u=root n=ansible |     node2
+2025-09-22 08:15:19,772 p=381 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2025-09-22 08:15:20,219 p=381 u=root n=ansible | node2 | SUCCESS => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3.10"},"changed": false,"ping": "pong","warnings": ["Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information."]}
+2025-09-22 08:15:20,244 p=381 u=root n=ansible | node1 | SUCCESS => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3.10"},"changed": false,"ping": "pong","warnings": ["Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information."]}
+2025-09-22 08:15:20,335 p=381 u=root n=ansible | node3 | SUCCESS => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3.10"},"changed": false,"ping": "pong","warnings": ["Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information."]}
+2025-09-22 08:15:33,541 p=418 u=root n=ansible | [WARNING]: Unable to parse /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as an inventory source
+
+2025-09-22 08:15:33,542 p=418 u=root n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2025-09-22 08:15:33,545 p=418 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {}
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    }
+}
+2025-09-22 08:15:39,616 p=420 u=root n=ansible | ansible [core 2.17.14]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.10/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.10.12 (main, Aug 15 2025, 14:32:43) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.1.6
+  libyaml = True
+2025-09-22 08:15:39,618 p=420 u=root n=ansible | Using /etc/ansible/ansible.cfg as config file
+2025-09-22 08:15:39,690 p=420 u=root n=ansible | host_list declined parsing /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as it did not pass its verify_file() method
+2025-09-22 08:15:39,795 p=420 u=root n=ansible | Skipping due to inventory source not existing or not being readable by the current user
+2025-09-22 08:15:39,797 p=420 u=root n=ansible | script declined parsing /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as it did not pass its verify_file() method
+2025-09-22 08:15:39,800 p=420 u=root n=ansible | auto declined parsing /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as it did not pass its verify_file() method
+2025-09-22 08:15:39,801 p=420 u=root n=ansible | Skipping due to inventory source not existing or not being readable by the current user
+2025-09-22 08:15:39,802 p=420 u=root n=ansible | yaml declined parsing /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as it did not pass its verify_file() method
+2025-09-22 08:15:39,803 p=420 u=root n=ansible | Skipping due to inventory source not existing or not being readable by the current user
+2025-09-22 08:15:39,803 p=420 u=root n=ansible | ini declined parsing /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as it did not pass its verify_file() method
+2025-09-22 08:15:39,804 p=420 u=root n=ansible | Skipping due to inventory source not existing or not being readable by the current user
+2025-09-22 08:15:39,805 p=420 u=root n=ansible | toml declined parsing /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as it did not pass its verify_file() method
+2025-09-22 08:15:39,806 p=420 u=root n=ansible | [WARNING]: Unable to parse /ansible-workspace/Chapitre-2-Ansible-Language-Core/02-ini-inventory/problematic-inventory as an inventory source
+
+2025-09-22 08:15:39,806 p=420 u=root n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2025-09-22 08:15:39,811 p=420 u=root n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2025-09-22 08:15:39,840 p=420 u=root n=ansible | Skipping callback 'default', as we already have a stdout callback.
+2025-09-22 08:15:39,840 p=420 u=root n=ansible | Skipping callback 'minimal', as we already have a stdout callback.
+2025-09-22 08:15:39,841 p=420 u=root n=ansible | Skipping callback 'oneline', as we already have a stdout callback.
+2025-09-22 08:15:50,697 p=423 u=root n=ansible | [WARNING]: Unable to parse /ansible-workspace/Chapitre-2-Ansible-Language-
+Core/02-ini-inventory/inventory-file as an inventory source
+
+2025-09-22 08:15:50,698 p=423 u=root n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2025-09-22 08:15:50,700 p=423 u=root n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+2025-09-22 08:15:50,701 p=423 u=root n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: group-name
+
+2025-09-22 08:15:50,701 p=423 u=root n=ansible |   hosts (0):
