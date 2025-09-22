@@ -1,0 +1,37 @@
+# Dockerfile pour le conteneur maître Ansible
+FROM ubuntu:22.04
+
+# Éviter les interactions pendant l'installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Mise à jour et installation des paquets nécessaires
+RUN apt-get update && apt-get install -y \
+    openssh-client \
+    openssh-server \
+    python3 \
+    python3-pip \
+    sshpass \
+    vim \
+    curl \
+    iputils-ping \
+    net-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installation d'Ansible
+RUN pip3 install ansible
+
+# Configuration SSH
+RUN mkdir /var/run/sshd
+RUN echo 'root:ansible123' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+# Génération des clés SSH pour le maître
+RUN ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa -N ""
+
+# Configuration Ansible
+RUN mkdir -p /etc/ansible
+COPY ansible.cfg /etc/ansible/ansible.cfg
+
+# Point d'entrée
+CMD ["/usr/sbin/sshd", "-D"]

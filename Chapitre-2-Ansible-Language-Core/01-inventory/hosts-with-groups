@@ -1,0 +1,47 @@
+# Inventory Ansible avec groupes
+# Organiser les hôtes par fonction ou type
+
+# ==========================================
+# GROUPE WEBSERVERS
+# ==========================================
+# Serveurs web (Apache, Nginx, etc.)
+[webservers]
+node1
+node2
+
+# ==========================================
+# GROUPE DATABASE
+# ==========================================
+# Serveurs de base de données
+[database]
+node3
+
+# ==========================================
+# GROUPE DE GROUPES
+# ==========================================
+# Créer des groupes parents contenant d'autres groupes
+[production:children]
+webservers
+database
+
+# ==========================================
+# VARIABLES PAR GROUPE
+# ==========================================
+# Variables spécifiques aux serveurs web
+[webservers:vars]
+http_port=80
+max_clients=200
+server_role=web
+
+# Variables spécifiques aux bases de données
+[database:vars]
+db_port=3306
+max_connections=100
+server_role=db
+
+# Variables globales pour tous les hôtes
+[all:vars]
+ansible_user=root
+ansible_ssh_pass=ansible123
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+environment=test

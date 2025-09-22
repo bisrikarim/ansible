@@ -1,0 +1,28 @@
+# Inventory Ansible de base
+# Ce fichier définit les hôtes sur lesquels Ansible va travailler
+
+# ==========================================
+# EXEMPLE 1: Liste simple d'hôtes
+# ==========================================
+# Chaque ligne représente un hôte
+# Ansible utilisera ces noms pour se connecter
+
+node1
+node2
+node3
+
+# ==========================================
+# VARIABLES GLOBALES
+# ==========================================
+# Ces variables s'appliquent à tous les hôtes
+# [all:vars] signifie "variables pour tous les hôtes"
+
+[all:vars]
+# Utilisateur pour les connexions SSH
+ansible_user=root
+
+# Mot de passe SSH (pour l'environnement de test uniquement)
+ansible_ssh_pass=ansible123
+
+# Désactiver la vérification des clés d'hôte (pour les tests)
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

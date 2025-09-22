@@ -1,0 +1,69 @@
+# Docker Compose pour l'environnement d'apprentissage Ansible
+# 1 conteneur maître (ansible-master) + 3 conteneurs workers (node1, node2, node3)
+# Tous basés sur Ubuntu 22.04 avec SSH configuré
+
+version: '3.8'
+
+services:
+  # Conteneur maître Ansible
+  ansible-master:
+    build:
+      context: .
+      dockerfile: Dockerfile.master
+    container_name: ansible-master
+    hostname: ansible-master
+    networks:
+      - ansible-network
+    volumes:
+      - ./:/ansible-workspace
+    working_dir: /ansible-workspace
+    tty: true
+    stdin_open: true
+    depends_on:
+      - node1
+      - node2
+      - node3
+
+  # Worker Node 1
+  node1:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: node1
+    hostname: node1
+    networks:
+      - ansible-network
+    tty: true
+    stdin_open: true
+
+  # Worker Node 2
+  node2:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: node2
+    hostname: node2
+    networks:
+      - ansible-network
+    tty: true
+    stdin_open: true
+
+  # Worker Node 3
+  node3:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: node3
+    hostname: node3
+    networks:
+      - ansible-network
+    tty: true
+    stdin_open: true
+
+# Réseau personnalisé pour tous les conteneurs
+networks:
+  ansible-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
