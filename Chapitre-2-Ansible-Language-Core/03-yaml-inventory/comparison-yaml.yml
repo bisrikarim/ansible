@@ -1,0 +1,66 @@
+# Inventory YAML pour comparaison avec INI
+# Exactement la même configuration que comparison-ini.ini
+
+all:
+  # Variables globales - équivalent à [all:vars]
+  vars:
+    ansible_user: root
+    ansible_ssh_pass: ansible123
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    environment: production
+    company: example-corp
+  
+  # Groupes d'hôtes
+  children:
+    
+    # Équivalent à [webservers]
+    webservers:
+      hosts:
+        # Équivalent à: node1 http_port=80 max_clients=100 server_role=primary
+        node1:
+          http_port: 80
+          max_clients: 100
+          server_role: primary
+        # Équivalent à: node2 http_port=8080 max_clients=200 server_role=secondary
+        node2:
+          http_port: 8080
+          max_clients: 200
+          server_role: secondary
+      # Équivalent à [webservers:vars]
+      vars:
+        service_type: web
+        restart_policy: always
+        log_level: info
+    
+    # Équivalent à [databases]
+    databases:
+      hosts:
+        # Équivalent à: node3 db_port=3306 max_connections=150 db_role=master backup_enabled=true
+        node3:
+          db_port: 3306
+          max_connections: 150
+          db_role: master
+          backup_enabled: true
+      # Équivalent à [databases:vars]
+      vars:
+        service_type: database
+        restart_policy: unless-stopped
+        log_level: warning
+        backup_schedule: daily
+    
+    # Équivalent à [cache-servers]
+    cache-servers:
+      hosts:
+        # Équivalent à: node1 cache_port=6379 memory_limit=256mb
+        node1:
+          cache_port: 6379
+          memory_limit: 256mb
+        # Équivalent à: node2 cache_port=6380 memory_limit=512mb
+        node2:
+          cache_port: 6380
+          memory_limit: 512mb
+      # Équivalent à [cache-servers:vars]
+      vars:
+        service_type: cache
+        cache_type: redis
+        eviction_policy: allkeys-lru

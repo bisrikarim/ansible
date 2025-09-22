@@ -1,0 +1,176 @@
+# Inventory YAML avancé avec structures complexes
+# Démonstration des capacités avancées du format YAML
+
+all:
+  vars:
+    # Variables globales
+    ansible_user: root
+    ansible_ssh_pass: ansible123
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    
+    # Configuration globale complexe
+    monitoring:
+      enabled: true
+      interval: 30
+      alerts:
+        - email
+        - slack
+    
+    # Liste des environnements
+    environments:
+      - production
+      - staging
+      - development
+    
+    # Configuration réseau globale
+    network_config:
+      dns_servers:
+        primary: "8.8.8.8"
+        secondary: "8.8.4.4"
+      ntp_servers:
+        - "pool.ntp.org"
+        - "time.google.com"
+
+  children:
+    
+    # Groupe application avec configuration complexe
+    application-tier:
+      children:
+        webservers:
+          hosts:
+            node1:
+              # Configuration complexe par hôte
+              server_config:
+                hostname: web-primary
+                ip_address: "172.25.0.3"
+                ports:
+                  http: 80
+                  https: 443
+                  admin: 8080
+                resources:
+                  cpu_cores: 4
+                  memory_gb: 8
+                  disk_gb: 100
+                # Liste des services
+                services:
+                  - nginx
+                  - php-fpm
+                  - redis
+                # Configuration des logs
+                logging:
+                  level: info
+                  files:
+                    access: "/var/log/nginx/access.log"
+                    error: "/var/log/nginx/error.log"
+            
+            node2:
+              server_config:
+                hostname: web-secondary
+                ip_address: "172.25.0.2"
+                ports:
+                  http: 8080
+                  https: 8443
+                  admin: 9080
+                resources:
+                  cpu_cores: 2
+                  memory_gb: 4
+                  disk_gb: 50
+                services:
+                  - nginx
+                  - php-fpm
+                logging:
+                  level: warning
+                  files:
+                    access: "/var/log/nginx/access.log"
+                    error: "/var/log/nginx/error.log"
+          
+          # Variables communes aux webservers
+          vars:
+            tier_type: application
+            load_balancer: nginx
+            ssl_enabled: true
+            # Configuration de sauvegarde
+            backup_config:
+              enabled: true
+              schedule: "0 2 * * *"  # 2h du matin
+              retention_days: 30
+              destinations:
+                - local: "/backup/web"
+                - remote: "s3://backup-bucket/web"
+    
+    # Groupe data avec base de données
+    data-tier:
+      children:
+        databases:
+          hosts:
+            node3:
+              server_config:
+                hostname: db-master
+                ip_address: "172.25.0.4"
+                ports:
+                  mysql: 3306
+                  admin: 3307
+                resources:
+                  cpu_cores: 8
+                  memory_gb: 16
+                  disk_gb: 500
+                # Configuration de la base de données
+                database_config:
+                  engine: mysql
+                  version: "8.0"
+                  charset: utf8mb4
+                  max_connections: 200
+                  # Bases de données
+                  databases:
+                    - name: app_production
+                      users:
+                        - username: app_user
+                          password: "{{ vault_db_password }}"
+                          privileges: "SELECT,INSERT,UPDATE,DELETE"
+                    - name: app_logs
+                      users:
+                        - username: log_user
+                          password: "{{ vault_log_password }}"
+                          privileges: "INSERT,SELECT"
+                # Configuration de réplication
+                replication:
+                  enabled: false
+                  master: true
+                  slaves: []
+          
+          vars:
+            tier_type: data
+            backup_config:
+              enabled: true
+              schedule: "0 1 * * *"  # 1h du matin
+              retention_days: 60
+              type: mysqldump
+    
+    # Groupes par environnement
+    production:
+      children:
+        webservers:
+        databases:
+      vars:
+        env_type: production
+        monitoring_level: high
+        log_retention_days: 90
+        security_level: strict
+    
+    # Groupes par localisation
+    datacenter-east:
+      hosts:
+        node1:
+        node2:
+      vars:
+        datacenter: east
+        timezone: "America/New_York"
+        backup_region: us-east-1
+    
+    datacenter-west:
+      hosts:
+        node3:
+      vars:
+        datacenter: west
+        timezone: "America/Los_Angeles"
+        backup_region: us-west-1

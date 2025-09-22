@@ -1,0 +1,66 @@
+# Inventory YAML de base
+# Conversion simple depuis le format INI vers YAML
+
+# Structure racine - tous les hôtes et groupes
+all:
+  # Variables globales pour tous les hôtes
+  vars:
+    ansible_user: root
+    ansible_ssh_pass: ansible123
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    environment: production
+    company: example-corp
+  
+  # Groupes d'hôtes
+  children:
+    
+    # Groupe des serveurs web
+    webservers:
+      hosts:
+        node1:
+          # Variables spécifiques à node1
+          http_port: 80
+          max_clients: 100
+          server_role: primary
+        node2:
+          # Variables spécifiques à node2
+          http_port: 8080
+          max_clients: 200
+          server_role: secondary
+      # Variables communes à tous les webservers
+      vars:
+        service_type: web
+        restart_policy: always
+        log_level: info
+    
+    # Groupe des serveurs de base de données
+    databases:
+      hosts:
+        node3:
+          # Variables spécifiques à node3
+          db_port: 3306
+          max_connections: 150
+          db_role: master
+          backup_enabled: true
+      # Variables communes aux databases
+      vars:
+        service_type: database
+        restart_policy: unless-stopped
+        log_level: warning
+        backup_schedule: daily
+    
+    # Groupe des serveurs de cache
+    cache-servers:
+      hosts:
+        node1:
+          # node1 fait aussi du cache
+          cache_port: 6379
+          memory_limit: 256mb
+        node2:
+          # node2 aussi
+          cache_port: 6380
+          memory_limit: 512mb
+      vars:
+        service_type: cache
+        cache_type: redis
+        eviction_policy: allkeys-lru
